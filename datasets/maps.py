@@ -42,12 +42,12 @@ class maps(tfds.core.GeneratorBasedBuilder):
             features=tfds.features.FeaturesDict({
                 'Mgas': tfds.features.Tensor(shape=(256, 256, 1), dtype=tf.float32),
                 'Mstar': tfds.features.Tensor(shape=(256, 256, 1), dtype=tf.float32),
-                'omega_m': tfds.features.Tensor(shape=(15000,), dtype=tf.float32),
-                'sigma_8': tfds.features.Tensor(shape=(15000,), dtype=tf.float32),
-                "A_sn1": tfds.features.Tensor(shape=(15000,), dtype=tf.float32),
-                "A_agn1": tfds.features.Tensor(shape=(15000,), dtype=tf.dtypes.float32),
-                "A_sn2": tfds.features.Tensor(shape=(15000,), dtype=tf.dtypes.float32),
-                "A_agn2": tfds.features.Tensor(shape=(15000,), dtype=tf.dtypes.float32)
+                'omega_m':tf.float32,
+                'sigma_8': tf.float32,
+                "A_sn1": tf.float32,
+                "A_agn1": tf.float32,
+                "A_sn2": tf.float32,
+                "A_agn2": tf.float32
             }),
             supervised_keys=('noiseless_griz', 'last_major_merger'),
         )
