@@ -82,9 +82,9 @@ class maps(tfds.core.GeneratorBasedBuilder):
                 for c,l in enumerate(labels):
                     map = map_dict[l]
                     if c==0:
-                        example = {l: map.astype('float32')}
+                        example = {l: map[i].astype('float32')}
                     else:
-                        example.update({l:map.astype('float32')})
+                        example.update({l:map[i].astype('float32')})
 
                 params_map = params[i // 15]
                 example.update({'omega_m': params_map[0]})
