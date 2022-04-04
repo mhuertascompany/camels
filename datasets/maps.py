@@ -96,6 +96,6 @@ class maps(tfds.core.GeneratorBasedBuilder):
 
 
 
-                yield object_id, example
+                yield i, example
             else:
                 continue
