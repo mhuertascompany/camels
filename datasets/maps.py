@@ -66,7 +66,7 @@ class maps(tfds.core.GeneratorBasedBuilder):
 
 
         for c,l in enumerate(labels):
-            fmaps = root_path+"Maps_"+l+"_IllustrisTNG_LH_z=0.00.npy"
+            fmaps = root_path+"/Maps_"+l+"_IllustrisTNG_LH_z=0.00.npy"
             maps = np.load(fmaps)
             if c ==0:
                 map_dict = {l:maps.astype('float32')}
