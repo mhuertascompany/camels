@@ -80,7 +80,7 @@ class maps(tfds.core.GeneratorBasedBuilder):
             if True:
                 # Opening images
                 for c,l in enumerate(labels):
-                    map = map_dict[c]
+                    map = map_dict[l]
                     if c==0:
                         example = {l: map.astype('float32')}
                     else:
