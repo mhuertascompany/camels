@@ -1,4 +1,4 @@
-from camels.datasets import maps
+from datasets import maps
 
 
 # load dataset
