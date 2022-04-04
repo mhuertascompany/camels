@@ -9,7 +9,7 @@ import numpy as np
 import pandas as pd  # To extract the SnapNumLastMajorMerger values from TNG100_SDSS_MajorMergers.csv
 
 _DESCRIPTION = """
-#Data of TNG100 galaxy
+#Data of CAMELS 2D MAPS
 """
 
 _CITATION = ""
@@ -66,7 +66,7 @@ class maps(tfds.core.GeneratorBasedBuilder):
 
 
         for c,l in enumerate(labels):
-            fmaps = "Maps_"+l+"_IllustrisTNG_LH_z=0.00.npy"
+            fmaps = root_path+"Maps_"+l+"_IllustrisTNG_LH_z=0.00.npy"
             maps = np.load(fmaps)
             if c ==0:
                 map_dict = {l:maps.astype('float32')}
