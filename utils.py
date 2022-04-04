@@ -1,4 +1,4 @@
-ef build_model(nfilters, num_components, input_shape, output_shape):
+def build_model(nfilters, num_components, input_shape, output_shape):
     cnn = tfk.Sequential([
         tfkl.Conv2D(
             nfilters, (4, 4),
