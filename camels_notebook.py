@@ -52,6 +52,7 @@ def build_model(nfilters, num_components, input_shape, output_shape):
 
 
 # load temperature map - This can take a while
+print("Loading data...")
 fmaps = path+'/Maps_T_IllustrisTNG_LH_z=0.00.npy'
 maps  = np.load(fmaps)
 
@@ -87,5 +88,6 @@ Ytrain = Y[0:ntrain]
 Xtest = X[ntrain:ntrain+ntest]
 Ytest = Y[ntrain:ntrain+ntest]
 
+print("Training the model..")
 model1 = build_model(16,1,256,1)
 model1.fit(np.expand_dims(Xtrain,axis=3),np.array(Ytrain),epochs = 5, validation_data=(np.expand_dims(Xtest,axis=3),np.array(Ytest)))
