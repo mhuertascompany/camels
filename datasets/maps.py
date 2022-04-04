@@ -69,9 +69,9 @@ class maps(tfds.core.GeneratorBasedBuilder):
             fmaps = root_path+"/Maps_"+l+"_IllustrisTNG_LH_z=0.00.npy"
             maps = np.load(fmaps)
             if c ==0:
-                map_dict = {l:maps.astype('float32')}
+                map_dict = {l:np.expand_dims(maps.astype('float32'),axis=2)}
             else:
-                map_dict.update({l:maps.astype('float32')})
+                map_dict.update({l:np.expand_dims(maps.astype('float32'),axis=2)})
 
 
 
