@@ -66,12 +66,14 @@ class maps(tfds.core.GeneratorBasedBuilder):
         params_TNG = np.loadtxt(fparams_TNG)
         params_Simba = np.loadtxt(fparams_Simba)
 
-        labels = ['Mgas','Mstar']
+        labels = ['Mgas_TNG','Mstar_TNG','Mgas_Simba','Mstar_Simba']
 
 
         for c,l in enumerate(labels):
-            fmaps = root_path+"/Maps_"+l+"_IllustrisTNG_LH_z=0.00.npy"
-            maps = np.load(fmaps)
+            fmaps_TNG = root_path+"/Maps_"+l+"_IllustrisTNG_LH_z=0.00.npy"
+            fmaps_Simba = root_path+"/Maps_"+l+"_Simba_LH_z=0.00.npy"
+            maps_TNG = np.load(fmaps_TNG)
+            maps_Simba = np.load(fmaps_Simba)
             if c ==0:
                 map_dict = {l:np.expand_dims(maps.astype('float32'),axis=3)}
             else:
@@ -79,7 +81,7 @@ class maps(tfds.core.GeneratorBasedBuilder):
 
 
 
-        for i in range(len(maps)):
+        for i in range(len(maps_TNG)):
 
             if True:
                 # Opening images
