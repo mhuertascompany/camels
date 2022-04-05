@@ -13,7 +13,7 @@ tfk = tf.keras
 tfkl = tf.keras.layers
 plt.style.use(astropy_mpl_style)
 
-path = "/net/diva/scratch-ssd1/mhuertas/users.flatironinstitute.org/~fvillaescusa/priv/DEPnzxoWlaTQ6CjrXqsm0vYi8L7Jy/CMD/2D_maps/data"
+path = "/net/diva/scratch-ssd1/mhuertas/users.flatironinstitute.org/~fvillaescusa/priv/DEPnzxoWlaTQ6CjrXqsm0vYi8L7Jy/CMD/2D_maps/data/downloads/manual"
 
 negloglik = lambda y, p_y: -p_y.log_prob(y)
 
