@@ -15,9 +15,7 @@ _DESCRIPTION = """
 _CITATION = ""
 _URL = "https://github.com/mhuertascompany/camels"
 
-pMaps="/net/diva/scratch-ssd1/mhuertas/users.flatironinstitute.org/~fvillaescusa/priv/DEPnzxoWlaTQ6CjrXqsm0vYi8L7Jy/CMD/2D_maps/data/downloads/manual"
-Maps=np.load(pMaps)
-print(Maps)
+
 ## My functions added ##
 
 
@@ -42,7 +40,7 @@ class maps(tfds.core.GeneratorBasedBuilder):
             # Two features: image with 3 channels (stellar light, velocity map, velocity dispersion map)
             #  and redshift value of last major merger
             features=tfds.features.FeaturesDict({
-                'Mgas_TNG': tfds.features.Tensor(shape=(256, 256, 1), dtype=tf.float32),
+                'Mgas': tfds.features.Tensor(shape=(256, 256, 1), dtype=tf.float32),
                 'Mstar': tfds.features.Tensor(shape=(256, 256, 1), dtype=tf.float32),
                 'omega_m':tf.float32,
                 'sigma_8': tf.float32,
@@ -61,15 +59,19 @@ class maps(tfds.core.GeneratorBasedBuilder):
     def _generate_examples(self, root_path):
         """Yields examples."""
 
-        fparams = root_path + '/params_IllustrisTNG.txt'
-        params = np.loadtxt(fparams)
+        fparams_TNG = root_path + '/params_IllustrisTNG.txt'
+        fparams_SIMBA = root_path + '/params_SIMBA.txt'
+        params_TNG = np.loadtxt(fparams_TNG)
+        params_SIMBA = np.loadtxt(fparams_SIMBA)
 
         labels = ['Mgas','Mstar']
 
 
         for c,l in enumerate(labels):
-            fmaps = root_path+"/Maps_"+l+"_IllustrisTNG_LH_z=0.00.npy"
-            maps = np.load(fmaps)
+            fmaps_TNG = root_path+"/Maps_"+l+"_IllustrisTNG_LH_z=0.00.npy"
+            fmaps_SIMBA = root_path+"/Maps_"+l+"_SIMBA_LH_z=0.00.npy"
+            maps_TNG = np.load(fmaps_TNG)
+            maps_SIMBA = np.load(fmaps_SIMBA)
             if c ==0:
                 map_dict = {l:np.expand_dims(maps.astype('float32'),axis=3)}
             else:
