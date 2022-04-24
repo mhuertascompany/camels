@@ -15,7 +15,9 @@ _DESCRIPTION = """
 _CITATION = ""
 _URL = "https://github.com/mhuertascompany/camels"
 
-
+pMaps="/net/diva/scratch-ssd1/mhuertas/users.flatironinstitute.org/~fvillaescusa/priv/DEPnzxoWlaTQ6CjrXqsm0vYi8L7Jy/CMD/2D_maps/data/downloads/manual"
+Maps=np.load(pMaps)
+print(Maps)
 ## My functions added ##
 
 
@@ -40,7 +42,7 @@ class maps(tfds.core.GeneratorBasedBuilder):
             # Two features: image with 3 channels (stellar light, velocity map, velocity dispersion map)
             #  and redshift value of last major merger
             features=tfds.features.FeaturesDict({
-                'Mgas': tfds.features.Tensor(shape=(256, 256, 1), dtype=tf.float32),
+                'Mgas_TNG': tfds.features.Tensor(shape=(256, 256, 1), dtype=tf.float32),
                 'Mstar': tfds.features.Tensor(shape=(256, 256, 1), dtype=tf.float32),
                 'omega_m':tf.float32,
                 'sigma_8': tf.float32,
