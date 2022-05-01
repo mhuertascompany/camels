@@ -6,7 +6,7 @@ from scipy.interpolate import interp1d
 from astropy.table import Table
 from astropy.io import fits
 import numpy as np
-import pandas as pd  # To extract the SnapNumLastMajorMerger values from TNG100_SDSS_MajorMergers.csv
+import pandas as pd  # To extract the SnapNumLastMajorMerger values from tng# 100_SDSS_MajorMergers.csv
 
 _DESCRIPTION = """
 #Data of CAMELS 2D MAPS
@@ -16,7 +16,7 @@ _CITATION = ""
 _URL = "https://github.com/mhuertascompany/camels"
 
 
-## My functions added ##
+#My functions added
 
 
 
@@ -24,7 +24,6 @@ _URL = "https://github.com/mhuertascompany/camels"
 
 class maps(tfds.core.GeneratorBasedBuilder):
     """TNG100 galaxy dataset"""
-
     VERSION = tfds.core.Version("1.0.0")
     RELEASE_NOTES = {'1.0.0': 'Initial release.', }
     MANUAL_DOWNLOAD_INSTRUCTIONS = "Nothing to download. Dataset was generated at first call."
@@ -42,7 +41,7 @@ class maps(tfds.core.GeneratorBasedBuilder):
             features=tfds.features.FeaturesDict({
                 'Mgas': tfds.features.Tensor(shape=(256, 256, 1), dtype=tf.float32),
                 'Mstar': tfds.features.Tensor(shape=(256, 256, 1), dtype=tf.float32),
-                'omega_m':tf.float32,
+                'omega_m': tf.float32,
                 'sigma_8': tf.float32,
                 "A_sn1": tf.float32,
                 "A_agn1": tf.float32,
@@ -59,80 +58,82 @@ class maps(tfds.core.GeneratorBasedBuilder):
     def _generate_examples(self, root_path):
         """Yields examples."""
 
-        fparams_TNG = root_path + '/params_IllustrisTNG.txt'
-        fparams_SIMBA = root_path + '/params_SIMBA.txt'
-        params_TNG = np.loadtxt(fparams_TNG)
-        params_SIMBA = np.loadtxt(fparams_SIMBA)
+        fparams_tng = root_path + '/params_IllustrisTNG.txt'
+        fparams_simba = root_path + '/params_SIMBA.txt'
+        params_tng = np.loadtxt(fparams_tng)
+        params_simba = np.loadtxt(fparams_simba)
 
-        labels = ['Mgas','Mstar']
+        labels = ['Mgas', 'Mstar']
 
 
-        for c,l in enumerate(labels):
-            fmaps_TNG = root_path+"/Maps_"+l+"_IllustrisTNG_LH_z=0.00.npy" #he mirado los mapas en /net/diva/scratch-ssd1/mhuertas/users.flatironinstitute.org/~fvillaescusa/priv/DEPnzxoWlaTQ6CjrXqsm0vYi8L7Jy/CMD/2D_maps/data/downloads/manual
-            fmaps_SIMBA = root_path+"/Maps_"+l+"_SIMBA_LH_z=0.00.npy"
-            maps_TNG = np.load(fmaps_TNG)
-            maps_SIMBA = np.load(fmaps_SIMBA)
-            if c ==0:
-                map_dict_TNG = {l:np.expand_dims(maps_TNG.astype('float32'),axis=3)}
-                map_dict_SIMBA = {l:np.expand_dims(maps_SIMBA.astype('float32'),axis=3)} #.astype: cast a pandas object to a specified dtype
+        for c, l in enumerate(labels):
+            fmaps_tng = root_path+"/Maps_"+l+"_IllustrisTNG_LH_z=0.00.npy" #he mirado los mapas en /net/diva/scratch-ssd1/mhuertas/users.flatironinstitute.org/~fvillaescusa/priv/DEPnzxoWlaTQ6CjrXqsm0vYi8L7Jy/CMD/2D_maps/data/downloads/manual
+            fmaps_simba = root_path+"/Maps_"+l+"_SIMBA_LH_z=0.00.npy"
+            maps_tng = np.load(fmaps_tng)
+            maps_simba = np.load(fmaps_simba)
+            if c == 0:
+                map_dict_tng = {l: np.expand_dims(maps_tng.astype('float32'), axis=3)}
+                map_dict_simba = {l: np.expand_dims(maps_simba.astype('float32'), axis=3)} #.astype: cast a pandas object to a specified dtype
             else:
-                map_dict_TNG.update({l:np.expand_dims(maps_TNG.astype('float32'),axis=3)})
-                map_dict_SIMBA.update({l: np.expand_dims(maps_SIMBA.astype('float32'), axis=3)})
+                map_dict_tng.update({l: np.expand_dims(maps_tng.astype('float32'), axis=3)})
+                map_dict_simba.update({l: np.expand_dims(maps_simba.astype('float32'), axis=3)})
 
 
 #Para IllustrisTNG
 
-        for i in range(len(maps_TNG)):
+        for i in range(len(maps_tng)):
 
             if True:
                 # Opening images
                 for c,l in enumerate(labels):
-                    map_TNG = map_dict_TNG[l]
+                    map_tng = map_dict_tng[l]
                     if c==0:
-                        example_TNG = {l: map_TNG[i].astype('float32')}
+                        example_tng = {l: map_tng[i].astype('float32')}
                     else:
-                        example_TNG.update({l:map_TNG[i].astype('float32')})
+                        example_tng.update({l:map_tng[i].astype('float32')})
 
-                params_map_TNG = params_TNG[i // 15]
-                example_TNG.update({'omega_m': params_map_TNG[0]})
-                example_TNG.update({'sigma_8': params_map_TNG[1]})
-                example_TNG.update({'A_sn1': params_map_TNG[2]})
-                example_TNG.update({'A_agn1': params_map_TNG[3]})
-                example_TNG.update({'A_sn2': params_map_TNG[4]})
-                example_TNG.update({'A_agn2': params_map_TNG[5]})
+                params_map_tng = params_tng[i // 15]
+                example_tng.update({'omega_m': params_map_tng[0]})
+                example_tng.update({'sigma_8': params_map_tng[1]})
+                example_tng.update({'A_sn1': params_map_tng[2]})
+                example_tng.update({'A_agn1': params_map_tng[3]})
+                example_tng.update({'A_sn2': params_map_tng[4]})
+                example_tng.update({'A_agn2': params_map_tng[5]})
 
 
 
-                yield i, example_TNG
+                yield i, example_tng
             else:
                 continue
 
 
 #Para SIMBA
 
-        for i in range(len(maps_SIMBA)):
+        for i in range(len(maps_simba)):
 
             if True:
 
                 for c, l in enumerate(labels):
-                    map_SIMBA = map_dict_SIMBA[l]
+                    map_simba = map_dict_simba[l]
                     if c == 0:
-                        example_SIMBA = {l: map_SIMBA[i].astype('float32')}
+                        example_simba = {l: map_simba[i].astype('float32')}
                     else:
-                        example_SIMBA.update({l: map_SIMBA[i].astype('float32')})
+                        example_simba.update({l: map_simba[i].astype('float32')})
 
-                params_map_SIMBA = params_SIMBA[i // 15]
-                example_SIMBA.update({'omega_m': params_map_SIMBA[0]})
-                example_SIMBA.update({'sigma_8': params_map_SIMBA[1]})
-                example_SIMBA.update({'A_sn1': params_map_SIMBA[2]})
-                example_SIMBA.update({'A_agn1': params_map_SIMBA[3]})
-                example_SIMBA.update({'A_sn2': params_map_SIMBA[4]})
-                example_SIMBA.update({'A_agn2': params_map_SIMBA[5]})
+                params_map_simba = params_simba[i // 15]
+                example_simba.update({'omega_m': params_map_simba[0]})
+                example_simba.update({'sigma_8': params_map_simba[1]})
+                example_simba.update({'A_sn1': params_map_simba[2]})
+                example_simba.update({'A_agn1': params_map_simba[3]})
+                example_simba.update({'A_sn2': params_map_simba[4]})
+                example_simba.update({'A_agn2': params_map_simba[5]})
 
 
 
-                yield i, example_SIMBA
+                yield i, example_simba
             else:
                 continue
 
-print(map_SIMBA)
+
+print(map_simba)
+
