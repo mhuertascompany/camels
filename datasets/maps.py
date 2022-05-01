@@ -135,4 +135,4 @@ class maps(tfds.core.GeneratorBasedBuilder):
             else:
                 continue
 
-print(params_map_SIMBA)
+print(map_SIMBA)
