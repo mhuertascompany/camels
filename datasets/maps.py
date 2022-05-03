@@ -135,5 +135,3 @@ class maps(tfds.core.GeneratorBasedBuilder):
                 continue
 
 
-print(map_simba)
-
