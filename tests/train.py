@@ -1,4 +1,4 @@
-from datasets import maps
+from datasets import TNG_SIMBA
 import tensorflow as tf
 import tensorflow_probability as tfp
 import tensorflow_datasets as tfds
