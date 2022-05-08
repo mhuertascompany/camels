@@ -22,8 +22,8 @@ _URL = "https://github.com/mhuertascompany/camels"
 
 #######################
 
-class IllustrisTNG(tfds.core.GeneratorBasedBuilder):
-    """TNG100 galaxy dataset"""
+class simba(tfds.core.GeneratorBasedBuilder):
+    """SIMBA galaxy dataset"""
     VERSION = tfds.core.Version("1.0.0")
     RELEASE_NOTES = {'1.0.0': 'Initial release.', }
     MANUAL_DOWNLOAD_INSTRUCTIONS = "Nothing to download. Dataset was generated at first call."
@@ -58,33 +58,32 @@ class IllustrisTNG(tfds.core.GeneratorBasedBuilder):
     def _generate_examples(self, root_path):
         """Yields examples."""
 
-        fparams = root_path + '/params_IllustrisTNG.txt'
+        fparams = root_path + '/params_SIMBA.txt'
         params = np.loadtxt(fparams)
 
         labels = ['Mgas', 'Mstar']
 
 
         for c, l in enumerate(labels):
-            fmaps = root_path+"/Maps_"+l+"_IllustrisTNG_LH_z=0.00.npy" #he mirado los mapas en /net/diva/scratch-ssd1/mhuertas/users.flatironinstitute.org/~fvillaescusa/priv/DEPnzxoWlaTQ6CjrXqsm0vYi8L7Jy/CMD/2D_maps/data/downloads/manual
+            fmaps = root_path + "/Maps_" + l + "_SIMBA_LH_z=0.00.npy" #he mirado los mapas en /net/diva/scratch-ssd1/mhuertas/users.flatironinstitute.org/~fvillaescusa/priv/DEPnzxoWlaTQ6CjrXqsm0vYi8L7Jy/CMD/2D_maps/data/downloads/manual
             maps = np.load(fmaps)
             if c == 0:
-                map_dict = {l: np.expand_dims(maps.astype('float32'), axis=3)}
+                map_dict = {l: np.expand_dims(maps.astype('float32'), axis=3)} #.astype: cast a pandas object to a specified dtype
             else:
                 map_dict.update({l: np.expand_dims(maps.astype('float32'), axis=3)})
 
-
-#Para IllustrisTNG
+#Para SIMBA
 
         for i in range(len(maps)):
 
             if True:
-                # Opening images
-                for c,l in enumerate(labels):
+
+                for c, l in enumerate(labels):
                     map = map_dict[l]
-                    if c==0:
+                    if c == 0:
                         example = {l: map[i].astype('float32')}
                     else:
-                        example.update({l:map[i].astype('float32')})
+                        example.update({l: map[i].astype('float32')})
 
                 params_map = params[i // 15]
                 example.update({'omega_m': params_map[0]})
@@ -99,3 +98,5 @@ class IllustrisTNG(tfds.core.GeneratorBasedBuilder):
                 yield i, example
             else:
                 continue
+
+
