@@ -65,7 +65,7 @@ class illustristng(tfds.core.GeneratorBasedBuilder):
 
 
         for c, l in enumerate(labels):
-            fmaps = root_path+"/Maps_"+l+"_IllustrisTNG_LH_z=0.00.npy" #he mirado los mapas en /net/diva/scratch-ssd1/mhuertas/users.flatironinstitute.org/~fvillaescusa/priv/DEPnzxoWlaTQ6CjrXqsm0vYi8L7Jy/CMD/2D_maps/data/downloads/manual
+            fmaps = root_path+"/Maps_Mgas_"+l+"_IllustrisTNG_LH_z=0.00.npy" #he mirado los mapas en /net/diva/scratch-ssd1/mhuertas/users.flatironinstitute.org/~fvillaescusa/priv/DEPnzxoWlaTQ6CjrXqsm0vYi8L7Jy/CMD/2D_maps/data/downloads/manual
             maps = np.load(fmaps)
             if c == 0:
                 map_dict = {l: np.expand_dims(maps.astype('float32'), axis=3)}
