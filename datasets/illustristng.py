@@ -40,7 +40,7 @@ class illustristng(tfds.core.GeneratorBasedBuilder):
             #  and redshift value of last major merger
             features=tfds.features.FeaturesDict({
                 'Mgas': tfds.features.Tensor(shape=(256, 256, 1), dtype=tf.float32),
-                'T': tfds.features.Tensor(shape=(256, 256, 1), dtype=tf.float32),
+                'Mstar': tfds.features.Tensor(shape=(256, 256, 1), dtype=tf.float32),
                 'omega_m': tf.float32,
                 'sigma_8': tf.float32,
                 "A_sn1": tf.float32,
@@ -61,7 +61,7 @@ class illustristng(tfds.core.GeneratorBasedBuilder):
         fparams = root_path + '/params_IllustrisTNG.txt'
         params = np.loadtxt(fparams)
 
-        labels = ['Mgas', 'T']
+        labels = ['Mgas', 'Mstar']
 
 
         for c, l in enumerate(labels):
