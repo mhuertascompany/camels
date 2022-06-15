@@ -44,8 +44,7 @@ class TNG(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl):
-    """Returns generators according to split"""
-     return {tfds.Split.TRAIN: self._generate_examples(str(dl.manual_dir))}
+    return {tfds.Split.TRAIN: self._generate_examples(str(dl.manual_dir))}
 
   def load_maps(maptype):
     fmaps = root_path+'/Maps_'+maptype+'_IllustrisTNG_LH_z=0.00.npy'
