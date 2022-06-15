@@ -84,3 +84,5 @@ class TNG(tfds.core.GeneratorBasedBuilder):
                 yield i, example
             else:
                 continue
+
+        return maps, params
