@@ -81,10 +81,6 @@ class TNG(tfds.core.GeneratorBasedBuilder):
                 example.update({'A_agn1': params_map[3]})
                 example.update({'A_sn2': params_map[4]})
                 example.update({'A_agn2': params_map[5]})
-
-
                 yield i, example
             else:
                 continue
-
-
