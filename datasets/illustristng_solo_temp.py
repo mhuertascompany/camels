@@ -16,7 +16,7 @@ _CITATION = ""
 _URL = "https://github.com/mhuertascompany/camels"
 
 
-class TNG(tfds.core.GeneratorBasedBuilder):
+class illustristng_solo_temp(tfds.core.GeneratorBasedBuilder):
     VERSION = tfds.core.Version("1.0.0")
     RELEASE_NOTES = {'1.0.0': 'Initial release.', }
     MANUAL_DOWNLOAD_INSTRUCTIONS = "Nothing to download. Dataset was generated at first call."
