@@ -22,7 +22,7 @@ _URL = "https://github.com/mhuertascompany/camels"
 
 #######################
 
-class illustristng(tfds.core.GeneratorBasedBuilder):
+class illustristng_todo_tf(tfds.core.GeneratorBasedBuilder):
     """TNG100 galaxy dataset"""
     VERSION = tfds.core.Version("1.0.0")
     RELEASE_NOTES = {'1.0.0': 'Initial release.', }
