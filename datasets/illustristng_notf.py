@@ -2,7 +2,7 @@ import numpy as np
 
 root_path = '/net/diva/scratch-ssd1/mhuertas/users.flatironinstitute.org/~fvillaescusa/priv/DEPnzxoWlaTQ6CjrXqsm0vYi8L7Jy/CMD/2D_maps/data/downloads/manual'
 
-def _generate_examples(l): #l being the maptype
+def generate_examples(l): #l being the maptype
         fparams = root_path + '/params_IllustrisTNG.txt'
         params = np.loadtxt(fparams)
 
